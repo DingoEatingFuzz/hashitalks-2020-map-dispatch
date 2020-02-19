@@ -67,7 +67,7 @@ module.exports = [
   { name: "Hufnagel pseudocylindrical", value: d3.geoHufnagel },
   { name: "Kavrayskiy VII", value: d3.geoKavrayskiy7 },
   { name: "Lagrange conformal", value: d3.geoLagrange },
-  { name: "Larrivée", value: d3.geoLarrivee },
+  { name: "Larrivee", value: d3.geoLarrivee },
   { name: "Laskowski tri-optimal", value: d3.geoLaskowski },
   { name: "Loximuthal", value: d3.geoLoximuthal },
   { name: "Mercator", value: d3.geoMercator },

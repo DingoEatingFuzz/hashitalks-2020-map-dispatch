@@ -3,7 +3,7 @@ var d3core = require("d3");
 var d3geo = require("d3-geo");
 var d3geoProjection = require("d3-geo-projection");
 var fs = require("fs");
-var path = require("path");
+var fspath = require("path");
 var projectionMap = require("./projection-map");
 
 var d3 = Object.assign({}, d3core, d3geo, d3geoProjection);
@@ -90,4 +90,7 @@ clip
   .style("stroke-width", "2");
 
 // Save to disk
-fs.writeFileSync(path.join(outPath, projectionName + ".svg"), d3n.svgString());
+fs.writeFileSync(
+  fspath.join(outPath, projectionName + ".svg"),
+  d3n.svgString()
+);
