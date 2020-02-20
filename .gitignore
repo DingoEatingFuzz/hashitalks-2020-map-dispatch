@@ -1,2 +1,9 @@
 out
 node_modules
+
+file-transfer/node_modules
+file-transfer/out
+
+make-svg-linux
+make-svg-macos
+make-svg-win.exe
