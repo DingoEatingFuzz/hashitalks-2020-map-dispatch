@@ -4,6 +4,7 @@ var d3geo = require("d3-geo");
 var d3geoProjection = require("d3-geo-projection");
 var fs = require("fs");
 var fspath = require("path");
+var axios = require("axios");
 var projectionMap = require("./projection-map");
 
 var d3 = Object.assign({}, d3core, d3geo, d3geoProjection);
@@ -97,10 +98,19 @@ clip
 
 console.log("SVG Generated...");
 
+// TODO! Uncomment if host volumes read/write works
 // Save to disk
-fs.writeFileSync(
-  fspath.join(outPath, projectionName + ".svg"),
-  d3n.svgString()
-);
+// fs.writeFileSync(
+//   fspath.join(outPath, projectionName + ".svg"),
+//   d3n.svgString()
+// );
 
-console.log(`File saved at ${fspath.join(outPath, projectionName + ".svg")}!`);
+var svgString = new Buffer(d3n.svgString()).toString("base64");
+var filename = projectionName + ".svg";
+
+axios.post("http://localhost:3000/svg", {
+  svg: svgString,
+  filename
+});
+
+console.log(`File POSTed at ${fspath.join(outPath, projectionName + ".svg")}!`);
