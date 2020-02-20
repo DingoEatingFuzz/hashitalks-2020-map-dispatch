@@ -13,6 +13,10 @@ var projectionName = process.argv[2];
 var filePath = process.argv[3];
 var outPath = process.argv[4] || "./out";
 
+console.log(`Projection: ${projectionName}`);
+console.log(`File Path: ${filePath}`);
+console.log(`Ouput Path: ${outPath}`);
+
 if (!filePath) throw new Error("File is required");
 
 var projectionSlug = projectionName.toLowerCase().replace(/[\s\(\)]/g, "-");
@@ -28,6 +32,8 @@ projection.fitWidth(900, outline);
 
 var data = JSON.parse(fs.readFileSync(filePath, "utf8"));
 var stitchedData = d3.geoStitch(data);
+
+console.log("Data transformation complete...");
 
 // Set up map properties
 var graticule = d3.geoGraticule10();
@@ -89,8 +95,12 @@ clip
   .style("stroke", "#000000")
   .style("stroke-width", "2");
 
+console.log("SVG Generated...");
+
 // Save to disk
 fs.writeFileSync(
   fspath.join(outPath, projectionName + ".svg"),
   d3n.svgString()
 );
+
+console.log(`File saved at ${fspath.join(outPath, projectionName + ".svg")}!`);
