@@ -23,28 +23,26 @@ job "make-map" {
       artifact {
         source = "${NOMAD_META_DATA_FILE}"
         destination = "data.json"
+        mode = "file"
       }
 
       artifact {
-        source = "https://storage.googleapis.com/mlange-files/hashi-talks-1.0.0.tgz"
+        source = "https://storage.googleapis.com/mlange-files/make-svg-linux"
       }
 
       volume_mount {
         volume = "svgs"
         destination = "/svgs-mount"
+        read_only = false
       }
 
       config {
-        command = "bin/node"
+        command = "make-svg-linux"
         args = [
-          "local/package/make-svg.js",
           "${NOMAD_META_PROJECTION}",
           "data.json",
           "svgs-mount/svgs"
         ]
-
-        // command = "bash"
-        // args = [ "-c", "cat local/package/make-svg.js && sleep 1000" ]
       }
 
       resources {
